@@ -1,0 +1,97 @@
+For a day 1 lesson plan focusing on connecting SQLite with Python without delving into referential integrity, we'll create a simple schema that includes two tables: 
+`Products` and `Sales`. This simplicity allows students to grasp database operations like Create, Read, Update, and Delete (CRUD) without the added complexity of managing foreign keys or enforcing referential integrity.
+
+### Simple Schema:
+
+#### 1. Products Table
+
+This table will store basic information about the products available in an inventory.
+
+```sql
+CREATE TABLE Products (
+    product_id INTEGER PRIMARY KEY,
+    product_name TEXT NOT NULL,
+    price REAL NOT NULL,
+    quantity_available INTEGER NOT NULL
+);
+```
+
+#### 2. Sales Table
+
+This table will record sales transactions, storing only the essential details.
+
+```sql
+CREATE TABLE Sales (
+    sale_id INTEGER PRIMARY KEY,
+    product_id INTEGER,
+    quantity_sold INTEGER NOT NULL,
+    sale_date TEXT NOT NULL
+);
+```
+
+### Connecting SQLite with Python:
+
+Now, we will demonstrate how to connect to SQLite from Python and execute a simple query to create these tables.
+
+1. **Import SQLite in Python**
+
+   Start by importing the `sqlite3` library, which is part of the Python standard library.
+
+   ```python
+   import sqlite3
+   ```
+
+2. **Connect to the SQLite Database**
+
+   Create a new SQLite database named `flower_shoppe.db` by establishing a connection. If the database does not exist, SQLite will create it.
+
+   ```python
+   conn = sqlite3.connect('flower_shoppe.db')
+   ```
+
+3. **Create a Cursor Object**
+
+   A cursor enables you to execute SQL queries on a database.
+
+   ```python
+   cursor = conn.cursor()
+   ```
+
+4. **Execute SQL Commands**
+
+   Use the cursor to execute SQL commands. Here, we will create the `Products` and `Sales` tables.
+
+   ```python
+   cursor.execute('''CREATE TABLE Products (
+                       product_id INTEGER PRIMARY KEY,
+                       product_name TEXT NOT NULL,
+                       price REAL NOT NULL,
+                       quantity_available INTEGER NOT NULL
+                     )''')
+
+   cursor.execute('''CREATE TABLE Sales (
+                       sale_id INTEGER PRIMARY KEY,
+                       product_id INTEGER,
+                       quantity_sold INTEGER NOT NULL,
+                       sale_date TEXT NOT NULL
+                     )''')
+   ```
+
+5. **Commit and Close**
+
+   After executing the SQL statements, commit your changes and close the connection to the database.
+
+   ```python
+   conn.commit()
+   conn.close()
+   ```
+
+### Lesson Objectives Achieved:
+
+- **Connect to SQLite Database**: Students learn how to establish a connection to an SQLite database from Python.
+- **Execute SQL Commands**: Students get hands-on experience executing SQL statements to create tables and manage data.
+- **Introduction to Cursors**: Understand the role of cursors in executing SQL commands and retrieving data.
+- **Commit Changes**: Learn the importance of committing changes to make them persistent in the database.
+- **Close Connection**: Understand the significance of closing the database connection once operations are completed.
+
+This lesson plan introduces students to the basics of database operations in SQLite using Python, setting a solid foundation for more complex operations and concepts in future lessons.  
